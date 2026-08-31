@@ -1,4 +1,6 @@
 def fibonacci(n):
+    global call_count
+    call_count += 1
     if n <= 0:
         return 0
     if n == 1:
@@ -18,10 +20,11 @@ if __name__ == "__main__":
     import time
     while True:
         cache = {}
+        call_count = 0
         text = input("Please enter a positive integer: ")
         if not is_positive_integer(text):
             continue
         start = time.perf_counter()
         result = fibonacci(int(text))
         end = time.perf_counter()
-        print(f"fibonacci({int(text)}) = {result}, calculating this took {end - start:.4e} seconds.")
+        print(f"fibonacci({int(text)}) = {result}, calculating this took {end - start:.4e} seconds.\nThe function \"fibonacci\" was called {call_count} times.")
