@@ -87,5 +87,5 @@ Implement ``fibonacci_threeway.py``, where:
 
 ## Optional, challenge problems
 1. Instead of recursion, implement ``fibonacci(n)`` using iteration instead. DONE
-2. ``fibonacci_memoized.py`` fails if you give it a very large input number such as one million - why? Try fixing it. It was failing because we run out of possible recursion branches.
-3. There is an even faster way to calculate fibonacci numbers, in (almost) O(1) time. Read Wikipedia and try to implement it, or if you like a big challenge, implement it without looking it up.
+2. ``fibonacci_memoized.py`` fails if you give it a very large input number such as one million - why? Try fixing it. It was failing because we run out of possible recursion branches. We can fix it by not using recursion and instead using iteration.
+3. There is an even faster way to calculate fibonacci numbers, in (almost) O(1) time. Read Wikipedia and try to implement it, or if you like a big challenge, implement it without looking it up. DONE

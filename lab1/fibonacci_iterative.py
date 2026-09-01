@@ -5,7 +5,7 @@ def fibonacci(n):
         if n == 1:
             return 1
         a, b = 0, 1
-        for _ in range(2, n + 1):   # we start from 2 because we already know the first two Fibonacci numbers
+        for _ in range(2, n + 1):   # we start from 2 because we already know the first two Fibonacci numbers.
             a, b = b, a + b         # a becomes the previous Fibonacci number, b becomes the current Fibonacci number
         return b
 def is_positive_integer(text):
