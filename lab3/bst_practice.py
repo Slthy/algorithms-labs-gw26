@@ -63,8 +63,26 @@ def bst_insert(tree, key):
   Preconditions: key is comparable and distinct from existing keys in tree.
   Postconditions: tree satisfies BST search invariant; new node has correct parent.
   """
-  # TODO 2.3A: Traverse downward to find parent slot, attach Node(key, parent=...), and update tree.root if empty.
-  raise NotImplementedError("Complete bst_insert")
+  z = Node(key)
+  parent = None
+  current = T.root
+  while current != None:
+    parent = current
+    if key < current.key:
+      current = current.left
+    elif key > current.key:
+      current = current.right
+    else:
+      return current
+  z.parent = parent
+  if parent == None:
+    tree.root = z
+  elif key < parent.key:
+    parent.left = z
+  else:
+    parent.right = z
+  return z
+
 
 
 def bst_delete(tree, key):
@@ -76,6 +94,64 @@ def bst_delete(tree, key):
   # TODO 2.3B: Find target node z; handle 0-child, 1-child, and 2-child cases using transplant and successor.
   raise NotImplementedError("Complete bst_delete")
 
+
+
+
+'''
+BST-INSERT(T, key)
+  z = Node(key)
+  parent = None
+  current = T.root
+  while current != None
+    parent = current
+    if key < current.key
+      current = current.left
+    else if key > current.key
+      current = current.right
+    else
+      return current  // duplicate key
+  z.parent = parent
+  if parent == None
+    T.root = z
+  else if key < parent.key
+    parent.left = z
+  else
+    parent.right = z
+  return z
+
+TRANSPLANT(T, u, v)
+  if u.parent == None
+    T.root = v
+  else if u == u.parent.left
+    u.parent.left = v
+  else
+    u.parent.right = v
+  if v != None
+    v.parent = u.parent
+
+BST-DELETE(T, key)
+  z = BST-SEARCH(T.root, key)
+  if z == None
+    return None
+  if z.left == None
+    TRANSPLANT(T, z, z.right)
+  else if z.right == None
+    TRANSPLANT(T, z, z.left)
+  else
+    y = TREE-MINIMUM(z.right)
+    if y.parent != z
+      TRANSPLANT(T, y, y.right)
+      y.right = z.right
+      y.right.parent = y
+    TRANSPLANT(T, z, y)
+    y.left = z.left
+    y.left.parent = y
+  return z
+
+
+
+
+'''
 
 if __name__ == "__main__":
   from lab_checks import check_bst
