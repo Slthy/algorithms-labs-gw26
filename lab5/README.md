@@ -96,17 +96,17 @@ have a different height, creating imbalances higher up.
 
 ### 1.1 Short answer: BST deletion reminder
 
-**TODO 1.1:** Briefly recall the three deletion cases from Lab 3/4:
-- What happens when the target node has 0 children?
-- What happens when the target node has 1 child?
-- What happens when the target node has 2 children, and why is the in-order successor used?
+**Answer 1.1:**
+- 0 children: Remove the leaf.
+- 1 child: Replace it with its child.
+- 2 children: Replace it with its successor, preserving sorted order.
 
 ### 1.2 Short answer: Height change after deletion
 
-**TODO 1.2:** When you delete a leaf node from an AVL tree:
-- Does the leaf's parent's height change? By how much?
-- Can the grandparent's height change?
-- Can the imbalance propagate to the root?
+**Answer 1.2:**
+- It can decrease by one, or remain unchanged.
+- Yes, it can decrease by one.
+- Yes, height changes can propagate to the root.
 
 ---
 
@@ -128,7 +128,7 @@ Start with this AVL tree:
 ```
 (All nodes balanced: 30 has BF=1, 20 has BF=1, others BF=0.)
 
-**TODO 2.1:** Delete key `40` from this tree. Trace the rebalancing:
+**Answer 2.1:** Delete key `40` and trace the rebalancing:
 
 1. Perform BST deletion of 40 (it's a leaf). What is the tree after deletion?
 2. Rebalance from the parent of the deleted node (30).
@@ -140,8 +140,8 @@ Start with this AVL tree:
 | Step | Action | Tree state | Unbalanced node | BF | Signature | Rotation | Notes |
 |---|---|---|---|---|---|---|---|
 | 1 | Delete 40 | 40 is removed (leaf) | - | - | - | - | Tree now has 30 root, 20 left, nothing right |
-| 2 | Rebalance from 30 | TODO | TODO | TODO | TODO | TODO | TODO |
-| 3 | After rotation | TODO | TODO | TODO | - | - | Final state |
+| 2 | Rebalance from 30 | 30 has left child 20 | 30 | 2 | LL | Right rotation at 30 | 20 has BF 1 |
+| 3 | After rotation | 20 with children 10 and 30 | - | 0 | - | - | In-order: 10, 20, 30 |
 
 ### 2.2 Trace: Double rotation after deletion
 
@@ -155,7 +155,7 @@ Start with this AVL tree:
 ```
 (All nodes balanced: 30 has BF=0, 10 has BF=-1, others BF=0.)
 
-**TODO 2.2:** Delete key `40` from this tree. Trace the rebalancing:
+**Answer 2.2:** Delete key `40` and trace the rebalancing:
 
 1. Perform BST deletion of 40 (it's a leaf).
 2. Rebalance from the parent of the deleted node (30).
@@ -166,8 +166,10 @@ Start with this AVL tree:
 
 | Step | Action | Current node | BF before | Signature | Rotation applied | BF after |
 |---|---|---|---|---|---|---|
-| 1 | Delete 40 | 30 | TODO | TODO | TODO | TODO |
-| 2 | Verify final | - | - | - | - | - |
+| 1 | Delete 40 | 30 | 2 | LR | Left at 10, then right at 30 | 0 |
+| 2 | Verify final | 20 | 0 | - | - | 0 |
+
+Final tree: 20 with children 10 and 30. In-order: 10, 20, 30.
 
 ### 2.3 Trace: Two-child deletion with rebalancing
 
@@ -183,7 +185,7 @@ Start with this AVL tree:
 ```
 (All balanced initially.)
 
-**TODO 2.3:** Delete key `30`. This is a 2-child deletion (has both 20 and 40 as children).
+**Answer 2.3:** Delete key `30`. This is a 2-child deletion (has both 20 and 40 as children).
 Trace the rebalancing:
 
 1. Find the in-order successor of 30 (minimum of right subtree: 40).
@@ -194,8 +196,10 @@ Trace the rebalancing:
 
 | Step | Current node | BF | Imbalanced? | Violation | Rotation applied |
 |---|---|---|---|---|---|
-| 1 | (after replacing 30 with 40) | TODO | TODO | TODO | TODO |
-| 2 | (if needed, continue up) | TODO | TODO | TODO | TODO |
+| 1 | 40 | 2 | Yes | LL | Right at 40 |
+| 2 | 50 | 0 | No | - | - |
+
+Final in-order traversal: 10, 20, 40, 50, 70, 80.
 
 ---
 
@@ -205,7 +209,7 @@ Open `avl_practice.py` and implement the deletion function:
 
 ### 3.1 Implement AVL deletion
 
-**TODO 3.1:** Complete `avl_delete(tree, key)` in `avl_practice.py`.
+**Answer 3.1:** `avl_delete(tree, key)` is complete in `avl_practice.py`.
 
 The skeleton is provided. Complete the rebalancing loop to:
 1. Identify the parent of the deleted node to start rebalancing from.
@@ -241,21 +245,18 @@ measuring the number of rotations triggered by each operation.
 
 ### 4.1 Short answer: Why is deletion costlier?
 
-**TODO 4.1:** Based on your implementation and understanding of the algorithm:
+**Answer 4.1:**
 
-1. Why can a single deletion trigger multiple rotations at different ancestors,
-   whereas a single insertion triggers at most one rotation?
-2. What property of rotations ensures that insertion stops after one fix?
-3. Does a deletion ever need to rebalance higher than the root? Explain.
+1. Deletion can reduce subtree heights repeatedly up the tree.
+2. An insertion rotation restores the subtree's previous height.
+3. No. The root has no ancestor to rebalance.
 
 ### 4.2 Short answer: Real-world implications
 
-**TODO 4.2:** Consider a scenario where an application frequently insertions and deletions
-in an AVL tree (e.g., a priority queue or cache).
+**Answer 4.2:**
 
-1. Based on the rotation cost, would you expect insertions or deletions to be slower?
-2. If deletions become a bottleneck, what alternative data structure (from this course)
-   might handle deletions more efficiently?
+1. Deletions, because they may need several rotations.
+2. A hash table, when ordered traversal is unnecessary.
 
 ---
 

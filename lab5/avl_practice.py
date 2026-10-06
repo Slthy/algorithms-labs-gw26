@@ -167,8 +167,6 @@ def rotate_right_left(tree, z):
 
 def avl_delete(tree, key):
     """
-    TODO 3.1: Implement AVL deletion with rebalancing.
-
     Steps:
     1. Locate the node to delete (z).
     2. If z is a leaf (0 children), remove it and rebalance from z.parent.
@@ -228,13 +226,15 @@ def avl_delete(tree, key):
                 rotate_right(tree, current)
             else:
                 rotate_left_right(tree, current)
+            current = current.parent.parent
         elif bf < -1:  # Right-heavy
             if balance_factor(current.right) <= 0:
                 rotate_left(tree, current)
             else:
                 rotate_right_left(tree, current)
-
-        current = current.parent
+            current = current.parent.parent
+        else:
+            current = current.parent
 
     return z
 
