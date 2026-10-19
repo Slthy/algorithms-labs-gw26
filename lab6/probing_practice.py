@@ -39,7 +39,20 @@ def linear_probe_insert(table, key, value):
   - If the loop finishes without finding a slot, raise OverflowError("Hash table is full").
   """
   # TODO 3.2A: Probe along probe_index(key, i, table.capacity) to insert or update [key, value].
-  raise NotImplementedError("Complete linear_probe_insert")
+  for i in range(table.capacity):
+    slot = probe_index(key, i, table.capacity)
+    probes = i + 1
+
+    if table.slots[slot] is None:
+      table.slots[slot] = [key, value]
+      table.size += 1
+      return (slot, probes)
+
+    elif table.slots[slot][0] == key:
+      table.slots[slot][1] = value
+      return (slot, probes)
+
+  raise OverflowError("Hash table is full")
 
 
 def linear_probe_lookup(table, key):
@@ -52,7 +65,17 @@ def linear_probe_lookup(table, key):
   - If all slots are checked without a match, return (None, table.capacity).
   """
   # TODO 3.2B: Trace the linear probe path and stop on key match or empty slot (None).
-  raise NotImplementedError("Complete linear_probe_lookup")
+  for i in range(table.capacity):
+    slot = probe_index(key, i, table.capacity)
+    probes = i + 1
+
+    if table.slots[slot] is None:
+      return (None, probes)
+
+    elif table.slots[slot][0] == key:
+      return (table.slots[slot][1], probes)
+
+  return (None, table.capacity)
 
 
 if __name__ == "__main__":

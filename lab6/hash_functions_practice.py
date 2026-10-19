@@ -15,7 +15,8 @@ def division_hash(key, m):
   Preconditions: key is an integer, m > 0.
   """
   # TODO 1.2A: Return the remainder of key divided by table size m (using %).
-  raise NotImplementedError("Complete division_hash")
+  return key % m
+
 
 
 def multiplication_hash(key, m, A=GOLDEN_RATIO_A):
@@ -25,7 +26,8 @@ def multiplication_hash(key, m, A=GOLDEN_RATIO_A):
   Hint: In Python, ((key * A) % 1.0) extracts the fractional part after the decimal point.
   """
   # TODO 1.2B: Compute the fractional part of (key * A), multiply by m, and return math.floor(...).
-  raise NotImplementedError("Complete multiplication_hash")
+  fractional_part = (key * A) % 1.0
+  return math.floor(m * fractional_part)
 
 
 if __name__ == "__main__":
