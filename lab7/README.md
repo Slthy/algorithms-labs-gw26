@@ -25,7 +25,7 @@ pseudocode, and practice traces. The current sections cover:
 | File | Your work |
 |---|---|
 | `README.md` | Complete the traces and complexity questions |
-| `string_search.py` | Implement the four string-search functions |
+| `string_search.py` | Fill in the four implementation TODOs |
 | `lab_checks.py` | Provided automated checks; do not edit |
 
 - [x] Part 1: Trace and implement naive search.
@@ -77,7 +77,7 @@ NAIVE-SEARCH(T, P)
 
 ### 1.1 Trace: Where does each attempt stop?
 
-**Answer 1.1:** The completed shifts are below.
+**TODO 1.1:** For the same text and pattern, trace the shifts below.
 List the text indices checked, in order, including the one where a mismatch
 occurs. Record where $j$ stops and whether you add $s$ to the results.
 
@@ -90,7 +90,7 @@ occurs. Record where $j$ stops and whether you add $s$ to the results.
 
 ### 1.2 Implementation
 
-**Answer 1.2:** `naive_search` is complete in `string_search.py` using
+**TODO 1.2:** Complete `naive_search` in the provided `string_search.py` using
 the pseudocode. Return the list of all matching shifts, including overlaps.
 
 ---
@@ -318,8 +318,8 @@ Compare `P[6]`; record shift `2`; afterward `q = 1`.
 
 In the provided `string_search.py`:
 
-- **Answer 3.2A:** `compute_prefix_function(pattern)` returns `pi`.
-- **Answer 3.2B:** `kmp_search(text, pattern)` uses that helper.
+- **TODO 3.2A:** Complete `compute_prefix_function(pattern)` and return `pi`.
+- **TODO 3.2B:** Complete `kmp_search(text, pattern)` using that helper.
 
 Follow the pseudocode's fallback rules both on a mismatch and after a full
 match. The provided checks cover repeated fallbacks and overlapping matches.
@@ -356,7 +356,7 @@ Run the provided practice file from within the `lab7/` directory:
 python3 string_search.py
 ```
 
-- Unfinished implementations report an unfinished status.
+- Unfinished implementations report `[TODO]`.
 - Incorrect results or errors report `[FAIL]`.
 - Successful checks report `[PASS]`.
 
