@@ -29,10 +29,10 @@ any code. You will focus on the three most important building blocks from class:
 | `probing_practice.py` | Implement `linear_probe_insert` and `linear_probe_lookup`; `probe_index` is provided |
 | `lab_checks.py` | Provided automated checks and load-factor demonstration; do not edit |
 
-- [ ] Part 1: Division vs. Multiplication hash trace, 2 short functions, and 1 question.
-- [ ] Part 2: Separate Chaining trace, 2 functions (`chaining_insert`, `chaining_lookup`), and 1 question.
-- [ ] Part 3: Linear Probing trace, 2 functions (`linear_probe_insert`, `linear_probe_lookup`), and 1 question.
-- [ ] Run all three practice files and confirm all checks pass.
+- [x] Part 1: Division vs. Multiplication hash trace, 2 short functions, and 1 question.
+- [x] Part 2: Separate Chaining trace, 2 functions (`chaining_insert`, `chaining_lookup`), and 1 question.
+- [x] Part 3: Linear Probing trace, 2 functions (`linear_probe_insert`, `linear_probe_lookup`), and 1 question.
+- [x] Run all three practice files and confirm all checks pass.
 
 Keep function names and parameters unchanged, and do not use Python's built-in
 `dict` or `set` inside your hash table implementations.
@@ -122,8 +122,8 @@ worked for you.
 
 Open `hash_functions_practice.py` and implement the two functions (each is just
 1–2 lines of code):
-- **TODO 1.2A:** `division_hash(key, m)`
-- **TODO 1.2B:** `multiplication_hash(key, m, A)`
+- **Answer 1.2A:** `division_hash(key, m)`
+- **Answer 1.2B:** `multiplication_hash(key, m, A)`
 
 Test your implementation by running:
 
@@ -133,7 +133,7 @@ python3 hash_functions_practice.py
 
 ### 1.3 Short answer
 
-**TODO 1.3:** Look at your `k mod 8` column vs. your `k mod 7` column in
+**Answer 1.3:** Look at the `k mod 8` column versus the `k mod 7` column in
 Table 1.1. Why did all four keys collide into slot `3` when $m = 8$, and why did
 choosing a prime table size ($m = 7$) spread them into different slots?
 
@@ -224,7 +224,7 @@ Trace inserting `(12, "A")`, `(19, "B")`, `(24, "C")`, `(26, "D")`, and
 `(31, "E")` into an empty Separate Chaining table with $M = 7$ buckets (`0` to `6`)
 and $h(k) = k \bmod 7$.
 
-**TODO 2.1:** Fill in the remaining three rows of the table. The first two rows
+**2.1:** Fill in the remaining three rows of the table. The first two rows
 are worked for you.
 
 | Step | Insert `(key, val)` | Bucket Index ($k \bmod 7$) | Contents of `table.buckets[index]` after insert | Total items $N$ | Load Factor $\alpha = N / 7$ |
@@ -239,8 +239,8 @@ are worked for you.
 
 Open `chaining_practice.py`. Notice that `load_factor`, `chaining_rehash`, and
 `chaining_delete` are already provided for you! Implement the two core functions:
-- **TODO 2.2A:** `chaining_insert(table, key, value)`
-- **TODO 2.2B:** `chaining_lookup(table, key)`
+- **Answer 2.2A:** `chaining_insert(table, key, value)`
+- **Answer 2.2B:** `chaining_lookup(table, key)`
 
 Test your implementation by running:
 
@@ -250,7 +250,7 @@ python3 chaining_practice.py
 
 ### 2.3 Short answer
 
-**TODO 2.3:** Look at the provided `chaining_rehash` function in
+**Answer 2.3:** Look at the provided `chaining_rehash` function in
 `chaining_practice.py`. When the table doubles in capacity from $M = 4$ to
 $2M = 8$, why do we have to recompute `key % new_capacity` for every key
 (for example, key `14` moves from bucket `14 % 4 = 2` to bucket `14 % 8 = 6`)
@@ -349,8 +349,7 @@ Starting with the 7-slot table from the lecture walkthrough where `12` and `19`
 have already been inserted, complete the trace for inserting `26`, `3`, and `10`,
 and then trace two lookups on the final table.
 
-**TODO 3.1:** Complete the remaining rows of the table below (`M = 7`,
-$h(k) = k \bmod 7$). The first two insertions and first lookup are worked.
+**Answer 3.1:** The completed table uses `M = 7` and $h(k) = k \bmod 7$.
 
 | Operation | Initial Hash ($k \bmod 7$) | Slots Inspected in Order | Number of Probes | Result / Slot Placed | Table State `[s0, s1, s2, s3, s4, s5, s6]` |
 |---|---|---|---|---|---|
@@ -377,7 +376,7 @@ python3 probing_practice.py
 
 ### 3.3 Short answer
 
-**TODO 3.3:** When searching for missing key `33` ($33 \bmod 7 = 5$) in
+**Answer 3.3:** When searching for missing key `33` ($33 \bmod 7 = 5$) in
 Table 3.1, why can `linear_probe_lookup` stop as soon as it hits empty slot `1`
 without checking slots `2`, `3`, or `4`? Also, why does Open Addressing slow
 down much more drastically than Separate Chaining when the load factor $\alpha$
