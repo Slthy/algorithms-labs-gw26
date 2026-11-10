@@ -18,7 +18,7 @@ cost. We will build on the queues and DFS ideas from Lab 8.
 | File | Your work |
 |---|---|
 | `README.md` | Complete two short traces and two analysis questions |
-| `graph_algorithms.py` | Implement topological sorting, union-find, and Kruskal |
+| `graph_algorithms.py` | Complete the four implementation TODOs |
 | `lab_checks.py` | Provided automated checks; do not edit |
 
 - [x] Part 1: Trace and implement topological sorting.
@@ -84,7 +84,7 @@ TOPOLOGICAL-SORT(graph)
 Use the lecture graph above. Its initial in-degrees, in `A` through `E`
 order, are `[0, 1, 1, 2, 1]`. Visit neighbors in the order shown.
 
-**Answer 1.1:** The queue's front is on the left.
+**TODO 1.1:** Complete these steps. The queue's front is on the left.
 
 | Vertex removed | Queue afterward | In-degree of `D` |
 |---|---|---|
@@ -99,7 +99,7 @@ algorithm stops? What does the function return?
 
 ### 1.2 Implementation
 
-**Answer 1.2:** `topological_sort(graph)` is complete in `graph_algorithms.py`.
+**TODO 1.2:** Complete `topological_sort(graph)` in `graph_algorithms.py`.
 The graph is a directed adjacency list, as in Lab 8. Return a list containing
 all vertices, or `None` if there is a cycle. An empty graph returns `[]`.
 
@@ -218,9 +218,9 @@ minimum spanning tree for each connected component.
 
 In the provided `graph_algorithms.py`:
 
-- **Answer 2.1A:** `DisjointSet.find` uses path compression.
-- **Answer 2.1B:** `DisjointSet.union` uses union by rank.
-- **Answer 2.1C:** `kruskal(n, edges)` uses those methods.
+- **TODO 2.1A:** Complete `DisjointSet.find` with path compression.
+- **TODO 2.1B:** Complete `DisjointSet.union` with union by rank and the tie rule above.
+- **TODO 2.1C:** Complete `kruskal(n, edges)` using those methods.
 
 Edges are tuples `(u, v, weight)`, with each undirected edge listed once.
 Weights may be negative or equal. The starter supplies a sorted copy;
@@ -244,7 +244,7 @@ parent = [A, A, A, C, E]
 rank   = [2, 0, 1, 0, 0]
 ```
 
-**Answer 2.2:** Record roots after the two `find`
+**TODO 2.2:** Continue from this state. Record roots after the two `find`
 calls, then decide whether the edge is accepted.
 
 | Edge | Roots | Accept? | Total weight |
@@ -273,6 +273,6 @@ Run the provided file from within `lab9/`:
 python3 graph_algorithms.py
 ```
 
-Unfinished functions report an unfinished status, incorrect results report `[FAIL]`, and
+Unfinished functions report `[TODO]`, incorrect results report `[FAIL]`, and
 successful checks report `[PASS]`. When all checks pass, the command returns
 exit code `0`.
