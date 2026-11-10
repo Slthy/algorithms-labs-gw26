@@ -18,11 +18,11 @@ cost. We will build on the queues and DFS ideas from Lab 8.
 | File | Your work |
 |---|---|
 | `README.md` | Complete two short traces and two analysis questions |
-| `graph_algorithms.py` | Complete the four implementation TODOs |
+| `graph_algorithms.py` | Implement topological sorting, union-find, and Kruskal |
 | `lab_checks.py` | Provided automated checks; do not edit |
 
-- [ ] Part 1: Trace and implement topological sorting.
-- [ ] Part 2: Implement union-find and Kruskal, then trace their decisions.
+- [x] Part 1: Trace and implement topological sorting.
+- [x] Part 2: Implement union-find and Kruskal, then trace their decisions.
 
 Vertices in the code are numbered `0` through `n - 1`. In the lecture
 examples, `A, B, C, D, E` correspond to `0, 1, 2, 3, 4`.
@@ -84,20 +84,22 @@ TOPOLOGICAL-SORT(graph)
 Use the lecture graph above. Its initial in-degrees, in `A` through `E`
 order, are `[0, 1, 1, 2, 1]`. Visit neighbors in the order shown.
 
-**TODO 1.1:** Complete these steps. The queue's front is on the left.
+**Answer 1.1:** The queue's front is on the left.
 
 | Vertex removed | Queue afterward | In-degree of `D` |
 |---|---|---|
 | A | `[B, C]` | 2 |
-| B | TODO | TODO |
-| C | TODO | TODO |
+| B | `[C]` | 1 |
+| C | `[D]` | 0 |
 
 Now add the edge `E -> B`. Which vertices reach the output before the
 algorithm stops? What does the function return?
 
+`A, C` reach the output; the function returns `None`.
+
 ### 1.2 Implementation
 
-**TODO 1.2:** Complete `topological_sort(graph)` in `graph_algorithms.py`.
+**Answer 1.2:** `topological_sort(graph)` is complete in `graph_algorithms.py`.
 The graph is a directed adjacency list, as in Lab 8. Return a list containing
 all vertices, or `None` if there is a cycle. An empty graph returns `[]`.
 
@@ -128,9 +130,8 @@ processed before that vertex, so one pass over the edges is enough.
 
 ### 1.3 Analysis
 
-**TODO 1.3:** Give the time and extra-space bounds for Kahn's algorithm in
-terms of `V` vertices and `E` edges, excluding storage for the input graph.
-Briefly explain how often each vertex enters the queue and each edge is checked.
+**Answer 1.3:** Kahn's algorithm takes $\Theta(V+E)$ time and $\Theta(V)$ extra space.
+Each vertex queues once; each edge is checked once.
 
 ---
 
@@ -217,9 +218,9 @@ minimum spanning tree for each connected component.
 
 In the provided `graph_algorithms.py`:
 
-- **TODO 2.1A:** Complete `DisjointSet.find` with path compression.
-- **TODO 2.1B:** Complete `DisjointSet.union` with union by rank and the tie rule above.
-- **TODO 2.1C:** Complete `kruskal(n, edges)` using those methods.
+- **Answer 2.1A:** `DisjointSet.find` uses path compression.
+- **Answer 2.1B:** `DisjointSet.union` uses union by rank.
+- **Answer 2.1C:** `kruskal(n, edges)` uses those methods.
 
 Edges are tuples `(u, v, weight)`, with each undirected edge listed once.
 Weights may be negative or equal. The starter supplies a sorted copy;
@@ -243,24 +244,24 @@ parent = [A, A, A, C, E]
 rank   = [2, 0, 1, 0, 0]
 ```
 
-**TODO 2.2:** Continue from this state. Record roots after the two `find`
+**Answer 2.2:** Record roots after the two `find`
 calls, then decide whether the edge is accepted.
 
 | Edge | Roots | Accept? | Total weight |
 |---|---|---|---|
-| `(B, D): 4` | TODO | TODO | TODO |
-| `(A, C): 5` | TODO | TODO | TODO |
-| `(D, E): 6` | TODO | TODO | TODO |
+| `(B, D): 4` | `(A, A)` | No | 6 |
+| `(A, C): 5` | `(A, A)` | No | 6 |
+| `(D, E): 6` | `(A, E)` | Yes | 12 |
 
 After checking `(B, D)`, what is `parent[D]`? Explain why a rejected edge
 can still change the parent array. Does Kruskal examine `(C, E): 7`?
 
+`parent[D] = A`; `find` compresses paths. No, the MST is complete.
+
 ### 2.3 Analysis
 
-**TODO 2.3:** For a connected graph, give Kruskal's total time bound,
-including initialization and sorting. You may use the lecture's amortized
-bound of `O(α(V))` per union-find operation, where `α` grows extremely slowly.
-Which step dominates? What changes if the edges are already sorted?
+**Answer 2.3:** Kruskal takes $O(E \log E + E\alpha(V) + V)$; sorting dominates.
+Already-sorted edges take $O(E\alpha(V) + V)$.
 
 ---
 
@@ -272,6 +273,6 @@ Run the provided file from within `lab9/`:
 python3 graph_algorithms.py
 ```
 
-Unfinished functions report `[TODO]`, incorrect results report `[FAIL]`, and
+Unfinished functions report an unfinished status, incorrect results report `[FAIL]`, and
 successful checks report `[PASS]`. When all checks pass, the command returns
 exit code `0`.
