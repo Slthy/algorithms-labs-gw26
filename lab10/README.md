@@ -111,26 +111,28 @@ a disconnected graph.
 
 ### 1.1 Trace: Which connection improves?
 
-**TODO 1.1:** Continue from the state after removing `A`. Fill each row
+**Answer 1.1:** Continue from the state after removing `A`. Fill each row
 **after** checking the removed vertex's neighbors. An edge is written
 using its two endpoint labels.
 
 | Vertex removed | Edge added | `key[D]` | `key[E]` |
 |---|---|---|---|
-| `B` | TODO | TODO | TODO |
-| `C` | TODO | TODO | TODO |
-| `D` | TODO | TODO | TODO |
+| `B` | `A--B` | 4 | `inf` |
+| `C` | `B--C` | 4 | 6 |
+| `D` | `B--D` | 4 | 6 |
 
 1. Which vertex becomes `C`'s parent, and what causes the change? 
 
+`B`; edge `B--C` has weight `1`, improving key `3`.
 
 2. After removing `E`, what are the tree's four edges and total weight? 
 
+`A--B`, `B--C`, `B--D`, `C--E`; total `13`.
 
 
 ### 1.2 Implementation
 
-**TODO 1.2:** Complete `prim` in `weighted_graphs.py` using the pseudocode.
+**Answer 1.2:** `prim` in `weighted_graphs.py` follows the pseudocode.
 Return `(parent, total_weight)`. The starting vertex's parent stays `None`.
 For example, `parent[2] = 1` represents the tree edge `B--C`.
 
@@ -193,20 +195,20 @@ path, follow its parents back to the source and reverse that sequence.
 
 ### 2.1 Trace: Does the route improve?
 
-**TODO 2.1:** Use source `A` and the same graph. Complete these selected
+**Answer 2.1:** Use source `A` and the same graph. Complete these selected
 relaxations in execution order. Record the distance and parent of `v`
 after each check, including checks that leave them unchanged.
 
 | Edge checked | Candidate | Distance of `v` | Parent of `v` |
 |---|---|---|---|
-| `B -> C` | TODO | TODO | TODO |
-| `C -> D` | TODO | TODO | TODO |
-| `C -> E` | TODO | TODO | TODO |
-| `D -> E` | TODO | TODO | TODO |
+| `B -> C` | 3 | 3 | `A` |
+| `C -> D` | 8 | 6 | `B` |
+| `C -> E` | 9 | 9 | `C` |
+| `D -> E` | 13 | 9 | `C` |
 
 Give the final distance array and the shortest path from `A` to `E`:
 
- **TODO**
+ `[0, 2, 3, 6, 9]`; shortest path: `A -> C -> E`.
 
 ### 2.2 Implementation
 
@@ -217,18 +219,20 @@ undirected graphs, including graphs with unreachable vertices.
 
 ### 2.3 Compare and analyze
 
-**TODO 2.3:** Answer briefly.
+**Answer 2.3:**
 
 1. Change only the weight of `A--C` to `2.5`. Starting from `A`, what is
    `C`'s parent under each algorithm? What quantity does each algorithm
    minimize? 
 
+Prim: `B`; Dijkstra: `A`. Prim minimizes total tree weight; Dijkstra minimizes source distances.
 
 2. Consider the directed edges `S -> A: 2`, `S -> B: 5`, and `B -> A: -4`.
    Starting from `S`, which distance does Dijkstra finalize too early?
    Give the actual shortest distance and explain why the negative edge
    causes a problem.
 
+`A` finalizes at `2`; actual distance is `1`. Negative edges improve finalized paths.
 
 3. Let `V` and `E` be the numbers of vertices and edges. For the provided
    heap, building the queue takes `O(V)`, each removal or decrease takes
@@ -238,6 +242,8 @@ undirected graphs, including graphs with unreachable vertices.
    the time bound if finding the minimum instead scans an unsorted array
    of vertices?
 
+Each: $V$ removals, at most $E$ decreases, $O((V+E)\log V)$ time, $O(V)$ space.
+Unsorted arrays give $O(V^2+E)$ time.
 
 ---
 
